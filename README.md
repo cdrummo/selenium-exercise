@@ -71,3 +71,32 @@ From this point it run the python/selenium script using the following command:
     python selenium-excercise.py
 
 ## 💭 The solution and thoughts behind code:
+
+![alt text](https://github.com/cdrummo/selenium-exercise/blob/9865b765d700900066f69c66508070dabc8a92a0/Org%20charts.jpeg)
+
+The above image shows the decision flow for the algorithm I used. The reason for the algorithm I chose was that it will always get the right answer in two steps.
+
+The basic idea is to narrow down the choices from nine bars to three bars. From here we can easily determine which bar is fake by comparing two of the remaining three bars.
+
+
+## Implementation:
+
+In the first section of the code I am importer the necessary selenium packages and webdriver packages to use in the code. After importing, I setup the variables and options in order to launch the Google Chrome browser for the automation. I added the experimental option to "detach" to the options as I wanted the Browser to remain open after the code finsihes so that the user can see what happened in script. After launching the browser, I load the website in which the script will run.
+
+```python
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.keys import Keys
+import time
+
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver.get("http://sdetchallenge.fetch.com/")
+
+
+```
