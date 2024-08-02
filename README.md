@@ -74,7 +74,7 @@ From this point it run the python/selenium script using the following command:
 
 ![alt text](https://github.com/cdrummo/selenium-exercise/blob/9865b765d700900066f69c66508070dabc8a92a0/Org%20charts.jpeg)
 
-The above image shows the decision flow for the algorithm I used. The reason for the algorithm I chose was that it will always get the right answer in two steps.
+The above image shows the decision flow for the algorithm I used. The reason for the algorithm I chose, was that it will always get the right answer in two steps. This makes the algorithm complexity O(log n).
 
 The basic idea is to narrow down the choices from nine bars to three bars. From here we can easily determine which bar is fake by comparing two of the remaining three bars.
 
