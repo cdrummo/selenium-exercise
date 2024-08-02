@@ -16,8 +16,10 @@ for i in range(3):
     driver.find_element("id", "right_" + str(i)).send_keys(str(3 + i))
 
 driver.find_element("id", "weigh").click()
-time.sleep(3)
+time.sleep(5)
 result = driver.find_element("id", "reset").text
+
+answer = 0 if result == "<" else 3 if result == ">" else 6
 
 for i in range(1,3):
     driver.find_element("id", "left_" + str(i)).send_keys(Keys.CONTROL + "a")
@@ -25,15 +27,13 @@ for i in range(1,3):
     driver.find_element("id", "right_" + str(i)).send_keys(Keys.CONTROL + "a")
     driver.find_element("id", "right_" + str(i)).send_keys(Keys.DELETE)
 
-answer = 0 if result == "<" else 3 if result == ">" else 6
-
 driver.find_element("id", "left_0" ).send_keys(Keys.CONTROL + "a")
 driver.find_element("id", "left_0").send_keys(str(answer))
 driver.find_element("id", "right_0").send_keys(Keys.CONTROL + "a")
 driver.find_element("id", "right_0").send_keys(str(answer + 1))
 
 driver.find_element("id", "weigh").click()
-time.sleep(3)
+time.sleep(5)
 result = driver.find_element("id", "reset").text
 
 answer += 0 if result == "<" else 1 if result == ">" else 2
