@@ -125,9 +125,10 @@ answer = 0 if result == "<" else 3 if result == ">" else 6
 ### BUG
 
 ```diff
-- BUG: In this section I have to manually clear the text boxes and reload them the data as the button for the result has
-- the same id as the button that reset the boards. The webpage still works as intended.
-- However, using selenium it is difficult find the element for the real 'reset' button.
+- BUG: In this section I have to manually clear the text boxes and reload them the data 
+- as the button for the result has the same id as the button that reset the boards.
+- The webpage still works as intended.
+- However, using selenium it is difficult to find the element for the real 'reset' button.
 
 Result button:
 - <button id="reset" disabled class="button"> </button>
@@ -136,7 +137,7 @@ Reset button:
 - <button id="reset" class="button">Reset</button>
 ```
 
-In this section I manually clear the textboxes and reaload them with the new data set.
+In this section I manually clear the textboxes and reload them with the new data set. If the buttons did not share the same id I could remove the for loop and replace with single line to click the reset button.
 
 ```python
 
