@@ -81,7 +81,7 @@ The basic idea is to narrow down the choices from nine bars to three bars. From 
 
 ## Implementation:
 
-In the first section of the code I am importer the necessary selenium packages and webdriver packages to use in the code. After importing, I setup the variables and options in order to launch the Google Chrome browser for the automation. I added the experimental option to "detach" to the options as I wanted the Browser to remain open after the code finsihes so that the user can see what happened in script. After launching the browser, I load the website in which the script will run.
+In the first section of the code I am importing the necessary selenium packages and webdriver packages to use in the code. After importing, I setup the variables and options in order to launch the Google Chrome browser for the automation. I added the experimental option to "detach" to the options as I wanted the Browser to remain open after the code finishes so that the user can see what happened in script. After launching the browser, I load the website in which the script will run.
 
 ```python
 
@@ -100,7 +100,7 @@ driver.get("http://sdetchallenge.fetch.com/")
 
 ```
 
-The next section of the code loads in the numbers to the text boxes of the web pages.
+The next section of the code loads in the numbers to the text boxes of the webpages.
 
 ```python
 
@@ -125,8 +125,8 @@ answer = 0 if result == "<" else 3 if result == ">" else 6
 ### BUG
 
 ```diff
-- BUG: In this section I have to manually clear the text boxes and reload them the data 
-- as the button for the result has the same id as the button that reset the boards.
+- BUG: In this section I have to manually clear the text boxes and reload the data.
+- The button for the result has the same id as the button that reset the boards.
 - The webpage still works as intended.
 - However, using selenium it is difficult to find the element for the real 'reset' button.
 
