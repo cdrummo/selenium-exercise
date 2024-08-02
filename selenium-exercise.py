@@ -19,7 +19,6 @@ driver.find_element("id", "weigh").click()
 time.sleep(3)
 result = driver.find_element("id", "reset").text
 
-
 for i in range(1,3):
     driver.find_element("id", "left_" + str(i)).send_keys(Keys.CONTROL + "a")
     driver.find_element("id", "left_" + str(i)).send_keys(Keys.DELETE)
