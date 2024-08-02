@@ -85,12 +85,12 @@ In the first section of the code I am importer the necessary selenium packages a
 
 ```python
 
+import time
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-import time
 
 chrome_options = Options()
 chrome_options.add_experimental_option("detach", True)
@@ -98,5 +98,76 @@ chrome_options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 driver.get("http://sdetchallenge.fetch.com/")
 
+```
+
+The next section of the code loads in the numbers to the text boxes of the web pages.
+
+```python
+
+for i in range(3):
+    driver.find_element("id", "left_" + str(i)).send_keys(str(i))
+    driver.find_element("id", "right_" + str(i)).send_keys(str(3 + i))
 
 ```
+
+After loading the data into the boxes, we click the button to weigh the bars. I added a sleep here as it takes a couple seconds for the webpage to update with the comparison. After waiting it will read the results from webpage. Using the result we will begin our elemination of bars by selecting which subset of three bars to continue with.
+
+```python
+
+driver.find_element("id", "weigh").click()
+time.sleep(3)
+result = driver.find_element("id", "reset").text
+
+answer = 0 if result == "<" else 3 if result == ">" else 6
+
+```
+
+### BUG
+
+```diff
+- BUG: In this section I have to manually clear the text boxes and reload them the data as the button for the result has
+- the same id as the button that reset the boards. The webpage still works as intended.
+- However, using selenium it is difficult find the element for the real 'reset' button.
+
+Result button:
+- <button id="reset" disabled class="button"> </button>
+
+Reset button:
+- <button id="reset" class="button">Reset</button>
+```
+
+In this section I manually clear the textboxes and reaload them with the new data set.
+
+```python
+
+for i in range(1,3):
+    driver.find_element("id", "left_" + str(i)).send_keys(Keys.CONTROL + "a")
+    driver.find_element("id", "left_" + str(i)).send_keys(Keys.DELETE)
+    driver.find_element("id", "right_" + str(i)).send_keys(Keys.CONTROL + "a")
+    driver.find_element("id", "right_" + str(i)).send_keys(Keys.DELETE)
+
+driver.find_element("id", "left_0" ).send_keys(Keys.CONTROL + "a")
+driver.find_element("id", "left_0").send_keys(str(answer))
+driver.find_element("id", "right_0").send_keys(Keys.CONTROL + "a")
+driver.find_element("id", "right_0").send_keys(str(answer + 1))
+
+```
+
+After loading I run the weighing again and then calculate the final answer for the fake bar and then select the fake bar from the coins at the bottom of the page. At this point a pop up shows up on the webpage saying that I have found the right answer.
+
+```python
+
+driver.find_element("id", "weigh").click()
+time.sleep(3)
+result = driver.find_element("id", "reset").text
+
+answer += 0 if result == "<" else 1 if result == ">" else 2
+driver.find_element("id", "coin_" + str(answer)).click()
+
+
+```
+
+### BUG
+
+One last bug after submitting the final answer on the webpage, the message should read:  “Yay! You found it!” 
+But it actually displays: "Yay! You find it!"
