@@ -52,7 +52,7 @@ From the Windows command line, run the following command:
 
 From the Windows command line, run the following command:
 
-    pip install selenium
+    pip install webdriver_manager
 
 ### 4. Installing Google Chrome:
 
